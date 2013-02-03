@@ -12,6 +12,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form id="order" name="order" method="POST" action="OrderServlet">
+            <select id="item" name="item">
+                <option value="BURGER">Classic Burger</option>
+                <option value="CLUB">Turkey Club Sandwich</option>
+                <option value="REUBEN">Reuben Sandwich</option>
+                <option value="QUICHE">Quiche</option>
+                <option value="PASTA">Shrimp Pasta</option>
+                <option value="SALMON">Pan Seared Salmon</option>
+            </select><br/>
+            <button type="submit" id="addItem" name="addItem">
+                Add Item</button>
+        </form>
+        <form id="submitOrder" name="submitOrder" method="POST" action="ReceiptServlet">
+        <button id="submitOrder" name="submitOrder" type="submit">Submit Order</button>
+        </form>
     </body>
 </html>
