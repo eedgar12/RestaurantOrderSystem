@@ -63,7 +63,7 @@ public class Receipt {
         
         receiptString = receiptString + 
                 Items.valueOf(item).getName() + "  " +
-                Items.valueOf(item).getPrice();
+                Items.valueOf(item).getPrice() + "<br>";
         total += Items.valueOf(item).getPrice();
     }
     

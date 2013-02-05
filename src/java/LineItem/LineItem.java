@@ -14,11 +14,11 @@ import javax.persistence.Table;
  * @author Emma Edgar
  */
 @Entity
-@Table(name = "LineItems")
+@Table(name = "LineItem")
 @NamedQueries({
-    @NamedQuery(name = "LineItems.findPriceofBurger", query = "SELECT Price from LineItems;"),
-    @NamedQuery(name = "LineItems.findPriceofClub", query = "SELECT Price from LineItems;"),
-    @NamedQuery(name = "LineItems.findPriceofSalmon", query = "SELECT Price from LineItems;")})   
+    @NamedQuery(name = "LineItem.findPriceofBurger", query = "SELECT s FROM LineItem s;")/*,
+    @NamedQuery(name = "LineItems.findPriceofClub", query = "SELECT * from LineItems;"),
+    @NamedQuery(name = "LineItems.findPriceofSalmon", query = "SELECT Price from LineItems;")*/})   
 public class LineItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

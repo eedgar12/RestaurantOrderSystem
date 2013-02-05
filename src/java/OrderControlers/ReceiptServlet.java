@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -78,10 +79,10 @@ public class ReceiptServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String li = (String)emf.createEntityManager().createNamedQuery
-                ("LineItems.findPriceofBurger").getResultList().get(0);
+        LineItem li = (LineItem)emf.createEntityManager().createNamedQuery
+                ("LineItem.findPriceofBurger").getSingleResult();
         
-        String receipt = li;
+        String receipt = li.getName() + " " + li.getPrice();
         request.setAttribute("receipt", receipt);
         RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
         view.forward(request, response);
