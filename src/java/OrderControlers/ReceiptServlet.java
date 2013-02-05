@@ -1,8 +1,11 @@
 package OrderControlers;
 
+import LineItem.LineItem;
 import OrderModels.Receipt;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ReceiptServlet extends HttpServlet {
 
+    @PersistenceUnit
+    EntityManagerFactory emf;
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -72,9 +78,10 @@ public class ReceiptServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String li = (String)emf.createEntityManager().createNamedQuery
+                ("LineItems.findPriceofBurger").getResultList().get(0);
         
-        String receipt = "Receipt here";
-                
+        String receipt = li;
         request.setAttribute("receipt", receipt);
         RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
         view.forward(request, response);

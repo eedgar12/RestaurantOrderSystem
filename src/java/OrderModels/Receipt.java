@@ -1,5 +1,7 @@
 package OrderModels;
 
+import LineItem.LineItem;
+
 /**
  *
  * @author Emma Edgar
@@ -57,6 +59,8 @@ public class Receipt {
     }
     
     public void addItem(String item){
+        LineItem li = new LineItem();
+        
         receiptString = receiptString + 
                 Items.valueOf(item).getName() + "  " +
                 Items.valueOf(item).getPrice();
