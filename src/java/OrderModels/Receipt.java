@@ -16,7 +16,7 @@ public class Receipt {
         total = 0;
         tax = 0;
         tip = 0;
-        receiptString = "Thank you for dining at David's\n";
+        receiptString = "Thank you for dining at David's<br>";
     }
 
     public double getTotal() {
@@ -48,9 +48,9 @@ public class Receipt {
         tax = total * .05;
         total += tip + tax;
         receiptString = receiptString + 
-                "Tax:    " + tax + "\n" + 
-                "Tip:    " + tip + "\n" +
-                "Total:  " + total + "\n";
+                "Tax:    " + tax + "<br>" + 
+                "Tip:    " + tip + "<br>" +
+                "Total:  " + total + "<br>";
         return receiptString;
     }
 

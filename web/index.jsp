@@ -22,7 +22,7 @@
                 <option value="SALMON">Pan Seared Salmon</option>
             </select><br/>
             <button type="submit" id="addItem" name="addItem">
-                Add Item</button>
+                Get receipt for this item</button>
         </form>
         <form id="submitOrder" name="submitOrder" method="POST" action="ReceiptServlet">
         <button id="submitOrder" name="submitOrder" type="submit">Submit Order</button>

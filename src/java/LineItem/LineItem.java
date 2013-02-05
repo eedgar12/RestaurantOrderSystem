@@ -16,9 +16,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LineItems")
 @NamedQueries({
-    @NamedQuery(name = "LineItems.findPriceofBurger", query = "SELECT Price from LineItems WHERE name = 'Classic Burger';"),
-    @NamedQuery(name = "LineItems.findPriceofClub", query = "SELECT Price from LineItems WHERE name = 'Turkey Club';"),
-    @NamedQuery(name = "LineItems.findPriceofSalmon", query = "SELECT Price from LineItems WHERE name = 'Pan Seared Salmon';")})   
+    @NamedQuery(name = "LineItems.findPriceofBurger", query = "SELECT Price from LineItems;"),
+    @NamedQuery(name = "LineItems.findPriceofClub", query = "SELECT Price from LineItems;"),
+    @NamedQuery(name = "LineItems.findPriceofSalmon", query = "SELECT Price from LineItems;")})   
 public class LineItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

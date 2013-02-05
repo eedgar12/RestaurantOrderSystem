@@ -4,6 +4,7 @@
     Author     : Toshiba laptop
 --%>
 
+<%@page import="javax.print.attribute.standard.MediaSize.Other"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
             if (request.getAttribute("receipt") != null) {
                     out.print(request.getAttribute("receipt"));
                 }
-
+           
             %>
     </body>
 </html>

@@ -83,7 +83,9 @@ public class OrderServlet extends HttpServlet {
         
         Receipt receipt = new Receipt();
         receipt.addItem(item);
-        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+        String rs = receipt.getReceiptString();
+        request.setAttribute("receipt", rs);
+        RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
         view.forward(request, response);
     }
 
