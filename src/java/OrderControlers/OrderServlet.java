@@ -4,6 +4,7 @@
  */
 package OrderControlers;
 
+import LineItem.LineItem;
 import OrderModels.Receipt;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,6 +77,8 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         String item = request.getParameter("item");
         
         Receipt receipt = new Receipt();
