@@ -18,31 +18,27 @@ public class Receipt {
         tax = 0;
         tip = 0;
         receiptString = "Thank you for dining at David's<br>";
-        
     }
-    public Receipt(String[] items){
+    public Receipt(String[] itemArray){
        
         receiptString = "Thank you for dining at David's Diner<br>";
         
-        for (String i : items){
+        for (String i : itemArray){
             receiptString += i + "<br>";
         }
-
-        for (int i = 0; i < items.length; i++){
+        
+        items = new Item[itemArray.length];
+        for (int i = 0; i < itemArray.length; i++){
             
-            String[] itemInfo = items[i].split(" - \\$");
+            String[] itemInfo = itemArray[i].split(" - \\$");
             
             String name = itemInfo[0].trim();
             double price = Double.parseDouble(itemInfo[1].trim());
             
-            receiptString += "Name: " + name + " Price: " + price + "<br>";
-            
-            this.items[i] = new Item(name, price);
+            items[i] = new Item(name, price);
         }
         
-//        System.out.println("calculating total");
-//        total = calcTotal();
-        
+        total = calcTotal();
     }
 
     public double getTotal() {
@@ -70,13 +66,13 @@ public class Receipt {
     }
 
     public String getReceiptString() {
-//        tip = total * .20;
-//        tax = total * .05;
-//        total += tip + tax;
-//        receiptString = receiptString + 
-//                "Tax:    " + tax + "<br>" + 
-//                "Tip:    " + tip + "<br>" +
-//                "Total:  " + total + "<br>";
+        tip = total * .20;
+        tax = total * .05;
+        total += tip + tax;
+        receiptString = receiptString + 
+                "Tax:    " + tax + "<br>" + 
+                "Tip:    " + tip + "<br>" +
+                "Total:  " + total + "<br>";
         return receiptString;
     }
 
@@ -94,10 +90,11 @@ public class Receipt {
     }
     
     private double calcTotal(){
-        double t = 0;
-        for (Item i : items){
-            total += i.getPrice();
+        
+        for (int i = 0; i < items.length; i++){
+            total += items[i].getPrice();
         }
-        return t;
+        
+        return total;
     }
 }

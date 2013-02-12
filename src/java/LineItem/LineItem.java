@@ -47,9 +47,6 @@ public class LineItem implements Serializable {
      * privateList<String> tags = new ArrayList<String>();
      */
      
-     
-     
-     
     public String getName() {
         return name;
     }

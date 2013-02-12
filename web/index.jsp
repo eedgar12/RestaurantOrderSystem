@@ -23,8 +23,8 @@
             <button type="submit" id="addItem" name="addItem">
                 Get receipt</button>
         </form>
-        <form id="submitOrder" name="submitOrder" method="POST" action="ReceiptServlet">
+     <%/*   <form id="submitOrder" name="submitOrder" method="POST" action="ReceiptServlet">
         <button id="submitOrder" name="submitOrder" type="submit">Submit Order</button>
-        </form>
+        </form> */%>
     </body>
 </html>

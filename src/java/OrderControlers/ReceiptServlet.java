@@ -37,15 +37,13 @@ public class ReceiptServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ReceiptServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ReceiptServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            LineItem li = (LineItem)emf.createEntityManager().createNamedQuery
+                ("LineItem.findPriceofBurger").getSingleResult();
+        
+        String receipt = li.getName() + " " + li.getPrice();
+        request.setAttribute("receipt", receipt);
+        RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
+        view.forward(request, response);
         } finally {            
             out.close();
         }
@@ -79,13 +77,14 @@ public class ReceiptServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LineItem li = (LineItem)emf.createEntityManager().createNamedQuery
-                ("LineItem.findPriceofBurger").getSingleResult();
-        
-        String receipt = li.getName() + " " + li.getPrice();
-        request.setAttribute("receipt", receipt);
-        RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
-        view.forward(request, response);
+//        LineItem li = (LineItem)emf.createEntityManager().createNamedQuery
+//                ("LineItem.findPriceofBurger").getSingleResult();
+//        
+//        String receipt = li.getName() + " " + li.getPrice();
+//        request.setAttribute("receipt", receipt);
+//        RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
+//        view.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
