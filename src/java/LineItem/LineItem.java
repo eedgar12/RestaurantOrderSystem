@@ -13,6 +13,17 @@ import javax.persistence.Table;
  *
  * @author Emma Edgar
  */
+
+/*
+ * Notes from class:
+ * An entity has 2 states: Attached and Detached.  
+ * Inside a transaction, the entity is attached.  This means all changes are
+ * automatically saved.  When the values are passed to something outside of the
+ * transaction, the entity is detached and all changes have to be saved manually.
+ * 
+ * "updates" only works with attached states. "merge" works with both attached
+ * and detached.
+ */
 @Entity
 @Table(name = "LineItem")
 @NamedQueries({
@@ -28,6 +39,17 @@ public class LineItem implements Serializable {
     private String name;
     private double price;
 
+    
+    /*
+     * REFERENCE FOR JOINS
+     * @ElementCollection
+     * @CollectionTable(name="tags")
+     * privateList<String> tags = new ArrayList<String>();
+     */
+     
+     
+     
+     
     public String getName() {
         return name;
     }

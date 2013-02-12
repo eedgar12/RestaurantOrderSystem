@@ -8,6 +8,7 @@ import LineItem.LineItem;
 import OrderModels.Receipt;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -77,14 +78,17 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    
+//        String listOfItems="Items: <br>";
+        String[] items = request.getParameterValues("food");
+       
+        
+        Receipt receipt = new Receipt(items);
         
         
-        String item = request.getParameter("item");
+        request.setAttribute("receipt", receipt.getReceiptString());
         
-        Receipt receipt = new Receipt();
-        receipt.addItem(item);
-        String rs = receipt.getReceiptString();
-        request.setAttribute("receipt", rs);
+        
         RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
         view.forward(request, response);
     }

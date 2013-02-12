@@ -7,7 +7,12 @@ package OrderModels;
 public class Item {
     private String name;
     private double price;
-    private enum item{BURGER, CLUB, REUBEN, QUICHE, PASTA, SALMON};
+
+    public Item(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+    
     
     
     public String getName() {
