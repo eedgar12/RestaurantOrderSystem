@@ -7,6 +7,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%  String servletWithDB = "OrderServlet_DB";
+    String servletWithoutDB = "OrderServlet_NoDB";%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +17,7 @@
         <meta http-equiv="description" content="Place an order at David's Diner">
     </head>
     <body>
-        <form id="order" name="order" method="POST" action="ReceiptServlet">
+        <form id="order" name="order" method="POST" action="<%out.println(servletWithoutDB);%>">
             <input type="checkbox" name="food" value="Classic Burger">Classic Burger - $5.65<br>
             <input type="checkbox" name="food" value="Turkey Club">Turkey Club - $5.55<br>
             <input type="checkbox" name="food" value="Reuben Sandwich">Reuben Sandwich - $5.89<br>

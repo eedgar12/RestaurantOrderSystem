@@ -2,30 +2,16 @@ package OrderModels;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Query;
 import javax.persistence.Table;
-import javax.persistence.TypedQuery;
 
 /**
- *
  * @author Emma Edgar
- */
-
-/*
- * Notes from class:
- * An entity has 2 states: Attached and Detached.  
- * Inside a transaction, the entity is attached.  This means all changes are
- * automatically saved.  When the values are passed to something outside of the
- * transaction, the entity is detached and all changes have to be saved manually.
- * 
- * "updates" only works with attached states. "merge" works with both attached
- * and detached.
+ * This entity class represents an item on a receipt.
  */
 @Entity
 @Table(name = "LineItem")
@@ -72,8 +58,11 @@ public class LineItem implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
     
-   
     
     @Override
     public int hashCode() {

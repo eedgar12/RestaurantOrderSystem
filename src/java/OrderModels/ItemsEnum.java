@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package OrderModels;
 
 /**
- *
- * @author Toshiba laptop
+ * @author Emma Edgar
+ * This Enum represents the items for purchase at a restaurant.  This class
+ * was designed to be used in place of a database.
  */
-public enum Items {
+public enum ItemsEnum {
     BURGER(6.99, "Classic Burger"),
     CLUB(5.95, "Turkey Club"),
     REUBEN(6.49, "Reuben Sandwich"),
@@ -19,7 +16,7 @@ public enum Items {
     private double price;
     private String name;
     
-    Items(double price, String name){
+    ItemsEnum(double price, String name){
         this.price = price;
         this.name = name;
     }
@@ -30,9 +27,10 @@ public enum Items {
     public String getName(){
         return name;
     }
-//    public String getLineItem(String item){
-//        return getName(item) + " " + getPrice(item);
-//                
-//    }
-   
+
+    @Override
+    public String toString() {
+        return "ItemsEnum{" + "price=" + price + ", name=" + name + '}';
+    }
+    
 }

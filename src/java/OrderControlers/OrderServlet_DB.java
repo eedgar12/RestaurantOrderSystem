@@ -1,26 +1,23 @@
 package OrderControlers;
 
-import OrderModels.LineItem;
-import OrderModels.OrderModel;
-import OrderModels.Receipt;
+import OrderModels.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Emma Edgar
+ * OrderServlet_DB is a servlet that works with a database to submit an order and 
+ * output the receipt.
  */
-public class ReceiptServlet extends HttpServlet {
+public class OrderServlet_DB extends HttpServlet {
 
     @PersistenceContext(unitName = "RestaurantOrderSystemPU")
     EntityManager em;
@@ -42,7 +39,7 @@ public class ReceiptServlet extends HttpServlet {
         try {
             String[] items = request.getParameterValues("food");
             
-            OrderModel om = new OrderModel(items, em);
+            OrderService om = new OrderService(items, em);
             String receipt = om.getReceipt();
             request.setAttribute("receipt", receipt);
             RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
@@ -80,13 +77,6 @@ public class ReceiptServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        LineItem li = (LineItem)emf.createEntityManager().createNamedQuery
-//                ("LineItem.findPriceofBurger").getSingleResult();
-//        
-//        String receipt = li.getName() + " " + li.getPrice();
-//        request.setAttribute("receipt", receipt);
-//        RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
-//        view.forward(request, response);
         processRequest(request, response);
     }
 

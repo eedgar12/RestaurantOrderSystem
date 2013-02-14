@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Emma Edgar
+ * OrderServlet_DB is a servlet that does not work with a database to submit 
+ * an order and output the receipt.
  */
-public class OrderServlet extends HttpServlet {
+public class OrderServlet_NoDB extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -68,8 +70,6 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-//        String listOfItems="Items: <br>";
         processRequest(request, response);
 
     }

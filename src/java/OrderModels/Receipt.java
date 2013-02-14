@@ -3,25 +3,27 @@ package OrderModels;
 import java.text.DecimalFormat;
 
 /**
- *
  * @author Emma Edgar
+ * This class represents a receipt object.
  */
 public class Receipt {
 
     private double total;
+    private double subTotal;
     private double tax;
     private double tip;
     private String receiptString;
     private Item[] items;
     private final DecimalFormat PRICE_FORMAT = new DecimalFormat("#.00");
-    private Items[] itemEnumArray = {Items.BURGER, Items.CLUB, Items.PASTA, 
-        Items.QUICHE, Items.REUBEN, Items.SALMON};
+    private ItemsEnum[] itemEnumArray = {ItemsEnum.BURGER, ItemsEnum.CLUB, ItemsEnum.PASTA, 
+        ItemsEnum.QUICHE, ItemsEnum.REUBEN, ItemsEnum.SALMON};
+    private final String WELCOME = "Thank you for dining at David's<br><br>";
     
     public Receipt() {
         total = 0;
         tax = 0;
         tip = 0;
-        receiptString = "Thank you for dining at David's<br>";
+        receiptString = WELCOME;
     }
 
     /**
@@ -30,13 +32,8 @@ public class Receipt {
      * @param orderItems 
      */
     public Receipt(LineItem[] orderItems){
-        receiptString = "Thank you for dining at David's<br>";
-        items = new Item[orderItems.length];
-        for(int i = 0; i < items.length; i++){
-            items[i] = new Item(orderItems[i].getName(), orderItems[i].getPrice());
-            receiptString += orderItems[i].toString() + "<br>";
-        }
-        
+        receiptString = WELCOME;
+        addItems(orderItems);
     }
     
     /**
@@ -45,17 +42,8 @@ public class Receipt {
      * @param itemArray 
      */
     public Receipt(String[] itemArray) {
-        receiptString = "Thank you for dining at David's Diner<br>";
-        items = new Item[itemArray.length];
-        for (int i = 0; i < itemArray.length; i++){
-            for (int j = 0; j < itemEnumArray.length; j++){
-                if (itemArray[i].equals(itemEnumArray[j].getName())){
-                    items[i] = new Item(itemEnumArray[j].getName(), 
-                            itemEnumArray[j].getPrice());
-                    receiptString += items[i].toString() + "<br>";
-                }
-            }
-        }
+        receiptString = WELCOME;
+        addItems(itemArray);
     }
 
     public double getTotal() {
@@ -83,14 +71,7 @@ public class Receipt {
     }
 
     public String getReceiptString() {
-        total = calcTotal();
-        tip = total * .20;
-        tax = total * .05;
-        total += tip + tax;
-        receiptString = receiptString
-                + "Tax:    $" + PRICE_FORMAT.format(tax) + "<br>"
-                + "Tip:    $" + PRICE_FORMAT.format(tip) + "<br>"
-                + "Total:  $" + PRICE_FORMAT.format(total) + "<br>";
+        createReceipt();
         return receiptString;
     }
 
@@ -98,22 +79,89 @@ public class Receipt {
         this.receiptString = receiptString;
     }
 
-    public void addItem(String item) {
-        LineItem li = new LineItem();
-
-        receiptString = receiptString
-                + Items.valueOf(item).getName() + "  "
-                + Items.valueOf(item).getPrice() + "<br>";
-        total += Items.valueOf(item).getPrice();
+    public double getSubTotal() {
+        return subTotal;
     }
 
-    private double calcTotal() {
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public Item[] getItems() {
+        return items;
+    }
+
+    public void setItems(Item[] items) {
+        this.items = items;
+    }
+
+    public ItemsEnum[] getItemEnumArray() {
+        return itemEnumArray;
+    }
+
+    public void setItemEnumArray(ItemsEnum[] itemEnumArray) {
+        this.itemEnumArray = itemEnumArray;
+    }
+
+    public String getWelcome() {
+        return WELCOME;
+    }
+    
+    private double calcTip(){
+        tip = subTotal * .20;
+        return tip;
+    }
+    
+    private double calcTax(){
+        tax = subTotal * .05;
+        return tax;
+    }
+    
+    private double calcSubTotal() {
 
         for (int i = 0; i < items.length; i++) {
-            total += items[i].getPrice();
+            subTotal += items[i].getPrice();
         }
 
+        return subTotal;
+    }
+    private double calcTotal(){
+        total = subTotal + tip + tax;
         return total;
     }
+    
+    private String createReceipt(){
+        calcSubTotal();
+        calcTip();
+        calcTax();
+        calcTotal();
+        receiptString = receiptString
+                + "<br>"
+                + "Sub Total: $" + PRICE_FORMAT.format(subTotal) + "<br>"
+                + "Tax:       $" + PRICE_FORMAT.format(tax) + "<br>"
+                + "Tip:       $" + PRICE_FORMAT.format(tip) + "<br>"
+                + "Total:     $" + PRICE_FORMAT.format(total) + "<br>";
+        return receiptString;
+    }
+    
+    private void addItems(LineItem[] orderItems){
+        items = new Item[orderItems.length];
+        for(int i = 0; i < items.length; i++){
+            items[i] = new Item(orderItems[i].getName(), orderItems[i].getPrice());
+            receiptString += orderItems[i].toString() + "<br>";
+        }
+    }
  
+    private void addItems(String[] itemArray){
+        items = new Item[itemArray.length];
+        for (int i = 0; i < itemArray.length; i++){
+            for (int j = 0; j < itemEnumArray.length; j++){
+                if (itemArray[i].equals(itemEnumArray[j].getName())){
+                    items[i] = new Item(itemEnumArray[j].getName(), 
+                            itemEnumArray[j].getPrice());
+                    receiptString += items[i].toString() + "<br>";
+                }
+            }
+        }
+    }
 }
