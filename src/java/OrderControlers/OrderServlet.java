@@ -35,14 +35,14 @@ public class OrderServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String[] items = request.getParameterValues("food");
-       
-        Receipt receipt = new Receipt(items);
-        
-        request.setAttribute("receipt", receipt.getReceiptString());
-        
-        RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
-        view.forward(request, response);
-        } finally {            
+
+            Receipt receipt = new Receipt(items);
+
+            request.setAttribute("receipt", receipt.getReceiptString());
+
+            RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
+            view.forward(request, response);
+        } finally {
             out.close();
         }
     }
@@ -75,10 +75,10 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+
 //        String listOfItems="Items: <br>";
         processRequest(request, response);
-        
+
     }
 
     /**
