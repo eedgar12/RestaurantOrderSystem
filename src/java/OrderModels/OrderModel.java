@@ -3,6 +3,7 @@ package OrderModels;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -24,7 +25,6 @@ public class OrderModel {
         for(int i = 0; i<orderItems.length; i++){
             orderItems[i] = getItemByName(itemArray[i]);
         }
-//        
         receipt = new Receipt(orderItems);
     }
     
@@ -33,7 +33,6 @@ public class OrderModel {
         for(int i = 0; i<orderItems.length; i++){
             orderItems[i] = getItemByID(itemArray[i]);
         }
-        
         receipt = new Receipt(orderItems);
     }
     
@@ -53,13 +52,7 @@ public class OrderModel {
      */
     private double getPriceByName(String name) {
         TypedQuery<LineItem> query = em.createNamedQuery("itemByName", LineItem.class);
-        LineItem item = query.setParameter("name", name).getSingleResult();
-//        orderItems = new LineItem[items.size()];
-////        for (int i = 0; i < items.size(); i++){
-//            LineItem li = (LineItem) items.get(i);
-//            orderItems[i] = li;
-//        }
-        
+        LineItem item = query.setParameter("name", name).getSingleResult();        
         return item.getPrice();
     }
 
@@ -79,8 +72,10 @@ public class OrderModel {
         Query query;
         query = em.createNamedQuery("itemByName");
         query.setParameter("name", name);
-//        LineItem item = (LineItem)query.getSingleResult();
+        List<LineItem> items = query.getResultList();
+        System.out.println(items.toString());
         LineItem item = new LineItem();
+        item = items.get(0);
         return item;
     }
     
@@ -90,5 +85,6 @@ public class OrderModel {
         LineItem item = query.setParameter("ID", id).getSingleResult();
         return item;
     }
+  
     
 }

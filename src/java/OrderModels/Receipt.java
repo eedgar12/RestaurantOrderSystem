@@ -24,21 +24,29 @@ public class Receipt {
         receiptString = "Thank you for dining at David's<br>";
     }
 
+    /**
+     * Constructor
+     * Used with real database
+     * @param orderItems 
+     */
     public Receipt(LineItem[] orderItems){
+        receiptString = "Thank you for dining at David's<br>";
         items = new Item[orderItems.length];
         for(int i = 0; i < items.length; i++){
             items[i] = new Item(orderItems[i].getName(), orderItems[i].getPrice());
+            receiptString += orderItems[i].toString() + "<br>";
         }
-        receiptString = "Thank you for dining at David's<br>";
+        
     }
     
+    /**
+     * Constructor
+     * Used with fake databasse
+     * @param itemArray 
+     */
     public Receipt(String[] itemArray) {
-
         receiptString = "Thank you for dining at David's Diner<br>";
-
         items = new Item[itemArray.length];
-          
-        
         for (int i = 0; i < itemArray.length; i++){
             for (int j = 0; j < itemEnumArray.length; j++){
                 if (itemArray[i].equals(itemEnumArray[j].getName())){
@@ -48,7 +56,6 @@ public class Receipt {
                 }
             }
         }
-//        total = calcTotal();
     }
 
     public double getTotal() {
@@ -108,4 +115,5 @@ public class Receipt {
 
         return total;
     }
+ 
 }

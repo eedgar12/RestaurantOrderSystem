@@ -30,8 +30,8 @@ import javax.persistence.TypedQuery;
 @Entity
 @Table(name = "LineItem")
 @NamedQueries({
-    @NamedQuery(name = "itemByName", query = "SELECT s.price FROM LineItem s WHERE s.name = :name"),
-    @NamedQuery(name = "itemByID", query = "SELECT s.price FROM LineItem s WHERE s.id = :ID")})
+    @NamedQuery(name = "itemByName", query = "SELECT s FROM LineItem s WHERE s.name = :name"),
+    @NamedQuery(name = "itemByID", query = "SELECT s FROM LineItem s WHERE s.id = :ID")})
 public class LineItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -97,6 +97,6 @@ public class LineItem implements Serializable {
 
     @Override
     public String toString() {
-        return "LineItem.LineItem[ id=" + id + " ]";
+        return name + " - $" + price;
     }
 }
