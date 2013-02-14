@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package OrderControlers;
 
 import OrderModels.Receipt;
@@ -15,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Toshiba laptop
+ * @author Emma Edgar
  */
 public class OrderServlet extends HttpServlet {
 
@@ -35,11 +31,8 @@ public class OrderServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String[] items = request.getParameterValues("food");
-
             Receipt receipt = new Receipt(items);
-
             request.setAttribute("receipt", receipt.getReceiptString());
-
             RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
             view.forward(request, response);
         } finally {

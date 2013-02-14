@@ -1,10 +1,13 @@
 package OrderControlers;
 
-import LineItem.LineItem;
+import OrderModels.LineItem;
+import OrderModels.OrderModel;
 import OrderModels.Receipt;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,13 +18,13 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Toshiba laptop
+ * @author Emma Edgar
  */
 public class ReceiptServlet extends HttpServlet {
 
-    @PersistenceUnit
-    EntityManagerFactory emf;
-    
+    @PersistenceContext(unitName = "RestaurantOrderSystemPU")
+    EntityManager em;
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -37,14 +40,14 @@ public class ReceiptServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            LineItem li = (LineItem)emf.createEntityManager().createNamedQuery
-                ("LineItem.findPriceofBurger").getSingleResult();
-        
-        String receipt = li.getName() + " " + li.getPrice();
-        request.setAttribute("receipt", receipt);
-        RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
-        view.forward(request, response);
-        } finally {            
+            String[] items = request.getParameterValues("food");
+            
+            OrderModel om = new OrderModel(items, em);
+            String receipt = om.getReceipt();
+            request.setAttribute("receipt", receipt);
+            RequestDispatcher view = request.getRequestDispatcher("receipt.jsp");
+            view.forward(request, response);
+        } finally {
             out.close();
         }
     }

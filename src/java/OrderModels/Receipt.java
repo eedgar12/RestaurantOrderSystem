@@ -1,6 +1,5 @@
 package OrderModels;
 
-import LineItem.LineItem;
 import java.text.DecimalFormat;
 
 /**
@@ -25,6 +24,14 @@ public class Receipt {
         receiptString = "Thank you for dining at David's<br>";
     }
 
+    public Receipt(LineItem[] orderItems){
+        items = new Item[orderItems.length];
+        for(int i = 0; i < items.length; i++){
+            items[i] = new Item(orderItems[i].getName(), orderItems[i].getPrice());
+        }
+        receiptString = "Thank you for dining at David's<br>";
+    }
+    
     public Receipt(String[] itemArray) {
 
         receiptString = "Thank you for dining at David's Diner<br>";
@@ -41,7 +48,7 @@ public class Receipt {
                 }
             }
         }
-        total = calcTotal();
+//        total = calcTotal();
     }
 
     public double getTotal() {
@@ -69,13 +76,14 @@ public class Receipt {
     }
 
     public String getReceiptString() {
+        total = calcTotal();
         tip = total * .20;
         tax = total * .05;
         total += tip + tax;
         receiptString = receiptString
-                + "Tax:    " + PRICE_FORMAT.format(tax) + "<br>"
-                + "Tip:    " + PRICE_FORMAT.format(tip) + "<br>"
-                + "Total:  " + PRICE_FORMAT.format(total) + "<br>";
+                + "Tax:    $" + PRICE_FORMAT.format(tax) + "<br>"
+                + "Tip:    $" + PRICE_FORMAT.format(tip) + "<br>"
+                + "Total:  $" + PRICE_FORMAT.format(total) + "<br>";
         return receiptString;
     }
 

@@ -1,13 +1,16 @@
-package LineItem;
+package OrderModels;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Query;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,9 +30,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LineItem")
 @NamedQueries({
-    @NamedQuery(name = "LineItem.findPriceofBurger", query = "SELECT s FROM LineItem s;")/*,
-    @NamedQuery(name = "LineItems.findPriceofClub", query = "SELECT * from LineItems;"),
-    @NamedQuery(name = "LineItems.findPriceofSalmon", query = "SELECT Price from LineItems;")*/})   
+    @NamedQuery(name = "itemByName", query = "SELECT s.price FROM LineItem s WHERE s.name = :name"),
+    @NamedQuery(name = "itemByID", query = "SELECT s.price FROM LineItem s WHERE s.id = :ID")})
 public class LineItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +72,9 @@ public class LineItem implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+   
+    
     @Override
     public int hashCode() {
         int hash = 0;

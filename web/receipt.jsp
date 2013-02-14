@@ -1,7 +1,8 @@
 <%-- 
     Document   : receipt
     Created on : Feb 3, 2013, 3:19:35 PM
-    Author     : Toshiba laptop
+    Author     : Emma Edgar
+    Purpose    : To display the user's order receipt, including tax, tip, and total.
 --%>
 
 <%@page import="javax.print.attribute.standard.MediaSize.Other"%>
@@ -10,7 +11,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Your Receipt</title>
+        <meta http-equiv="description" content="Thank you for placing your order at David's Diner">
+              
     </head>
     <body>
         <%
